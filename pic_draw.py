@@ -53,17 +53,17 @@ for i in range(8760):
             u[r] = np.nan
             v[r] = np.nan
         elif temp[r,17] >= 0 and temp[r,17] < 90:
-            u[r] = np.sin(temp[r,17]) * temp[r,8]
-            v[r] = -temp[r,8] * np.cos(temp[r,17])
+            u[r] = np.sin(temp[r,17]) * temp[r,8] * -1
+            v[r] = temp[r,8] * np.cos(temp[r,17]) * -1
         elif temp[r,17] >= 90 and temp[r,17] < 180:
-             u[r] = np.cos(temp[r,17]) * temp[r,8]
-             v[r] = -temp[r,8] * np.sin(temp[r,17])
+             u[r] = np.sin(180-temp[r,17]) * temp[r,8] * -1
+             v[r] = temp[r,8] * np.cos(180 - temp[r,17])
         elif temp[r,17] >= 180 and temp[r,17] < 270:
-             u[r] = np.sin(temp[r,17]) * temp[r,8]
-             v[r] = temp[r,8] * np.cos(temp[r,17])
+             u[r] = np.sin(temp[r,17]-180) * temp[r,8]
+             v[r] = temp[r,8] * np.cos(temp[r,17]-180)
         elif temp[r,17] >= 270 and temp[r,17] < 360:
-             u[r] = np.sin(temp[r,17]) * temp[r,8] * -1
-             v[r] = -temp[r,8] * np.cos(temp[r,17])
+             u[r] = np.sin(360-temp[r,17]) * temp[r,8]
+             v[r] = temp[r,8] * np.cos(360-temp[r,17]) * -1
     plt.barbs(temp[:,1],temp[:,0],u,v,
               barb_increments = {'half':2,'full':4,'flag':20}) # zorder图层上下叠放位置，值越大越在上层
     
